@@ -1,0 +1,3 @@
+[submodule "PhotoFloat"]
+	path = PhotoFloat
+	url = https://github.com/thorbenk/PhotoFloat.git

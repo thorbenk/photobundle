@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!-- kate: tab-indents off; tab-width 2; replace-tabs on; indent-width 2; //-->
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+    <meta charset="utf-8">
+    <title>{{ page_title }}</title>
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0"> 
+    <!-- Note: Better keep the styling minimal; for example, the styling of the
+         landing page damaged the PhotoSwipe layout //-->
+    <style type="text/css">
+body {
+  background-color: #000000;
+  color: #ffffff;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 35px;
+    text-transform: uppercase;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+a {
+    text-decoration: none;
+    color: #a7e0d3;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+    color: #1d9b6c;
+}
+
+.gallery-thumbnail {
+    opacity: 0;
+    transition: opacity .3s ease-in;
+    -webkit-transition: opacity .3s ease-in;
+    -moz-transition: opacity .3s ease-in;
+} 
+    </style>
+    
+    <!-- PhotoSwipe styles //-->
+    <link href="css/photoswipe.min.css" rel="stylesheet" />
+    <link href="css/default-skin.min.css" rel="stylesheet" />
+    
+    <script>
+      document.write('<script src=js/photoswipe.min.js?r='+Math.random()+'><\/script>');
+      document.write('<script src=js/photoswipe-ui-default.min.js?r='+Math.random()+'><\/script>');
+    </script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/gallery.min.js"></script>
+    
+    <!--[if lt IE 9]>
+      <script>
+        document.createElement('figure');
+      </script>
+    <![endif]-->
+  </head>
+
+  <body>
+<h1 style="padding-top: 10px">{{ album_title }}</h1>
+<h3>{{ album_subtitle }}</h3>
+<div id="grid">
+{% for i in images %}
+  <div class="grid-item" style="width: {{ i.thumb_width }}px; height: {{ i.thumb_height }}px">
+    <a href="{{ i.cache_big_url }}"
+      data-size="{{ i.cache_big_width }}x{{ i.cache_big_height }}"
+      data-med="{{ i.cache_med_url }}" data-med-size="{{ i.cache_med_width }}x{{ i.cache_med_height }}"
+      data-original="{{ i.orig_url }}">
+    <img class="gallery-thumbnail" src="img/black.png"
+      data-src="{{ i.cache_thumb_url }}" width="{{ i.cache_thumb_width }}" height="{{ i.cache_thumb_height }}" alt="" />
+    </a>
+  </div>
+{% endfor %}
+</div>
+<br>
+  <div id="gallery" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+      <div class="pswp__ui pswp__ui--hidden">
+        <div class="pswp__top-bar">
+          <div class="pswp__counter"></div>
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="pswp__loading-indicator"><div class="pswp__loading-indicator__line"></div></div> -->
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip">
+            <a href="#" download class="pswp__share--download"></a>
+          </div>
+        </div>
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script type="text/javascript">
+
+$(document).ready(function() {
+    var $container = $('#grid');
+    $container.packery({
+        //itemSelector: '.grid-item',
+        gutter: 10,
+        //columnWidth: 300
+        transitionDuration: 0,
+        //containerStyle: null
+    });
+    
+    initPhotoSwipeFromDOM('#grid');
+    
+    $(".gallery-thumbnail").unveil(100, function() {
+        $(this).load(function() {
+          this.style.opacity = 1;
+        });
+    });
+});
+  </script>
+  <script src="js/packery.pkgd.min.js"></script>
+  <script src="js/jquery.unveil.min.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,14 @@
+node_modules
+
+dist/*.html
+dist/js
+dist/css
+dist/img
+dist/albums/*
+dist/cache/*
+!dist/albums/.keep
+!dist/cache/.keep
+
+*.kate-swp
+*.swp
+

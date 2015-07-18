@@ -1,0 +1,17 @@
+{
+  "name": "PhotoBundle",
+  "version": "0.1.0",
+  "description": "Minimal folder-based photo viewer for the web",
+  "author": "Thorben Kroeger <thorbenkroeger@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thorbenk/photobundle.git"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-cssmin": "^0.12.3",
+    "grunt-contrib-uglify": "^0.9.1"
+  }
+}
