@@ -11,6 +11,7 @@ based on
 
 ```bash
 git clone https://github.com/thorbenk/photobundle.git
+cd photobundle
 git submodule init
 git submodule update
 

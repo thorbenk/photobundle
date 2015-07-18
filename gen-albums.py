@@ -5,6 +5,19 @@ import sys
 import os
 from jinja2 import Template
 
+#------------------------------------------------------------------------------
+
+ALBUMS_ABS = "dist/albums"
+CACHE_ABS  = "dist/cache"
+
+ALBUMS_REL = "albums"
+CACHE_REL = "cache"
+
+def albumJsonFile (albumPath):
+   return CACHE_ABS + "/" + albumPath + "/_" + os.path.basename(albumPath) + ".json"
+
+#------------------------------------------------------------------------------
+
 def readAlbum(jsonFilename, sort=None):
     with open(jsonFilename, 'r') as f:
         d = json.load(f)
@@ -19,7 +32,8 @@ def writeAlbum(albumFilenames, outFilename, title, desc=None, sort=None, zipFile
     template = Template(open('template/gallery.t.html', 'r').read())
    
     albumPhotos = []
-    for albumPath, albumFileJson in albumFilenames:
+    for albumPath in albumFilenames:
+        albumFileJson = albumJsonFile (albumPath)
         for x in readAlbum(albumFileJson, sort=sort): 
             albumPhotos.append((albumFileJson, albumPath, x))
             
@@ -33,15 +47,14 @@ def writeAlbum(albumFilenames, outFilename, title, desc=None, sort=None, zipFile
     for i, (albumFileJson, albumPath, image) in enumerate(albumPhotos):
         print "[%04d/%04d] %s" % (i, len(albumPhotos), outFilename)
         sizes = image["thumbnailSizes"]
-        fname = image["name"].lower()
         
-        fname = fname.replace(" ", "_")
-        originalImageFilename = image["name"]
-        originalImageFilename = originalImageFilename.replace(" ", "%20")
+        assert " " not in image["name"]
+        #originalImageFilename = originalImageFilename.replace(" ", "%20")
         
-        n = os.path.splitext(os.path.basename(albumFileJson))[0]
-        fullPathPrefix  = albumPath + "/"
-        cachePathPrefix = "cache/" + n + "-"
+        fullPathPrefix  = ALBUMS_REL + "/" + albumPath + "/"
+        cachePathPrefix =  CACHE_REL + "/" + albumPath + "/"
+        
+        cacheFname = cachePathPrefix+image["name"]
 
         bigSize = sizes[-1]
         medSize = sizes[-2]
@@ -50,27 +63,25 @@ def writeAlbum(albumFilenames, outFilename, title, desc=None, sort=None, zipFile
         medSizeStr = "%dx%d" % (medSize[0], medSize[1])
         thumbSizeStr = "%dx%d" % (thumbSize[0], thumbSize[1])
         
-        cacheFname = cachePathPrefix+fname
+        entry = {}
+        entry["thumb_width"] = thumbSize[0]
+        entry["thumb_height"] = thumbSize[1]
         
-        image = {}
-        image["thumb_width"] = thumbSize[0]
-        image["thumb_height"] = thumbSize[1]
+        entry["cache_big_url"] = cacheFname+"_"+bigSizeStr+".jpg"
+        entry["cache_big_width"] = bigSize[0]
+        entry["cache_big_height"] = bigSize[1]
         
-        image["cache_big_url"] = cacheFname+"_"+bigSizeStr+".jpg"
-        image["cache_big_width"] = bigSize[0]
-        image["cache_big_height"] = bigSize[1]
+        entry["cache_med_url"] = cacheFname+"_"+medSizeStr+".jpg"
+        entry["cache_med_width"] = medSize[0]
+        entry["cache_med_height"] = medSize[1]
         
-        image["cache_med_url"] = cacheFname+"_"+medSizeStr+".jpg"
-        image["cache_med_width"] = medSize[0]
-        image["cache_med_height"] = medSize[1]
+        entry["cache_thumb_width"] = thumbSize[0]
+        entry["cache_thumb_height"] = thumbSize[1]
+        entry["cache_thumb_url"] = cacheFname+"_"+thumbSizeStr+".jpg"
         
-        image["cache_thumb_width"] = thumbSize[0]
-        image["cache_thumb_height"] = thumbSize[1]
-        image["cache_thumb_url"] = cacheFname+"_"+thumbSizeStr+".jpg"
+        entry["orig_url"] = fullPathPrefix + image["name"]
         
-        image["orig_url"] = fullPathPrefix+originalImageFilename
-        
-        images.append(image)
+        images.append(entry)
         
     out = template.render(page_title = album_title, album_title=album_title, album_subtitle=album_subtitle, images=images)
     with open(outFilename, 'w') as f:
@@ -78,10 +89,6 @@ def writeAlbum(albumFilenames, outFilename, title, desc=None, sort=None, zipFile
                     
 if __name__ == "__main__":
     
-    testalbum = [
-        ("albums/testalbum", "dist/cache/testalbum.json")
-    ]
-
-    writeAlbum(testalbum, "dist/testalbum.html", "Test Album")
+    writeAlbum(["testalbum", "testalbum/album2"], "dist/testalbum.html", "Test Album")
 
     
