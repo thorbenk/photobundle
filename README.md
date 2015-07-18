@@ -22,13 +22,15 @@ make grunt
 ```
 Configure web browser to serve files from `dist/`.
 
-## Creating albums
+## Creating albums and thumbnails
 
 First put or symlink your photos as a directory structure beneath `dist/albums`.
 
 Next, run `make thumbs` to generate thumbnails for all photos.
 
-To create a HTML gallery pages, create a JSON file `pages.json`
+## Create html gallery pages of albums
+
+To create HTML gallery pages, create a JSON file `pages.json`
 
 ```json
 [
