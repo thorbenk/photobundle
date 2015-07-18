@@ -47,4 +47,4 @@ To create a HTML gallery pages, create a JSON file `pages.json`
   to the gallery page by default).
 - The `title` is the page title and heading of the generated gallery page
 
-Then, run `./gen-albums page.json`
+Then, run `./gen-albums pages.json`
