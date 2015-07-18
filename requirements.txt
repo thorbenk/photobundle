@@ -1,0 +1,2 @@
+iptcinfo
+jinja2

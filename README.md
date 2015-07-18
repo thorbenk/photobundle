@@ -15,8 +15,7 @@ git submodule init
 git submodule update
 
 npm install
-pip install iptcinfo
-pip install jinja2
+pip install -r requirements.txt
 
 make grunt
 ```
