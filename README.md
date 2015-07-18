@@ -9,16 +9,21 @@ based on
 
 ## Installation
 
-- put album directory structure in `dist/albums`
-- edit `gen-albums.py`
-
 ```bash
+git clone https://github.com/thorbenk/photobundle.git
+git submodule init
+git submodule update
+
 npm install
 pip install iptcinfo
 pip install jinja2
 
-make
-./gen-albums.py
+make grunt
 ```
-
 Configure web browser to serve files from `dist/`.
+
+## Creating albums
+
+- put album directory structure in `dist/albums`
+- edit `gen-albums.py`
+- run `make albums`
