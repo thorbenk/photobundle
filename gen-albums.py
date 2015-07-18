@@ -7,6 +7,8 @@ from jinja2 import Template
 
 #------------------------------------------------------------------------------
 
+OUTPUT_PREFIX = "dist/"
+
 ALBUMS_ABS = "dist/albums"
 CACHE_ABS  = "dist/cache"
 
@@ -26,7 +28,7 @@ def readAlbum(jsonFilename, sort=None):
         photos = sorted(photos, key=lambda image: image["name"])
     return photos
 
-def writeAlbum(albumFilenames, outFilename, title, desc=None, sort=None, zipFile=None):
+def writeAlbum(albumFilenames, outFilename, title, desc=None, sort=None, indent=0):
     assert isinstance(albumFilenames, list)
     
     template = Template(open('template/gallery.t.html', 'r').read())
@@ -37,7 +39,7 @@ def writeAlbum(albumFilenames, outFilename, title, desc=None, sort=None, zipFile
         for x in readAlbum(albumFileJson, sort=sort): 
             albumPhotos.append((albumFileJson, albumPath, x))
             
-    print "there are %d photos in %s" % (len(albumPhotos), outFilename)
+    print indent*" " + "%d photos" % (len(albumPhotos))
     
     album_title = title
     album_subtitle = "%d Fotos" % len(albumPhotos)
@@ -45,7 +47,6 @@ def writeAlbum(albumFilenames, outFilename, title, desc=None, sort=None, zipFile
     images = []
     
     for i, (albumFileJson, albumPath, image) in enumerate(albumPhotos):
-        print "[%04d/%04d] %s" % (i, len(albumPhotos), outFilename)
         sizes = image["thumbnailSizes"]
         
         assert " " not in image["name"]
@@ -84,11 +85,22 @@ def writeAlbum(albumFilenames, outFilename, title, desc=None, sort=None, zipFile
         images.append(entry)
         
     out = template.render(page_title = album_title, album_title=album_title, album_subtitle=album_subtitle, images=images)
-    with open(outFilename, 'w') as f:
+    
+    fname = OUTPUT_PREFIX + outFilename
+    with open(fname, 'w') as f:
         f.write(out)
+    print indent*" " + "written to '%s'" % fname
                     
 if __name__ == "__main__":
-    
-    writeAlbum(["testalbum", "testalbum/album2"], "dist/testalbum.html", "Test Album")
-
-    
+    if len(sys.argv) != 2:
+        print "Usage: %s <filename>" % sys.argv[0]
+        sys.exit(0)
+       
+    fname = sys.argv[1]
+    assert os.path.exists(fname)
+    with open(fname, 'r') as f:
+        d = json.load(f)
+   
+    for album in d:
+        print "* Generate album '%s'" % album["title"]
+        writeAlbum(album["dirs"], album["out"], album["title"], indent=2)

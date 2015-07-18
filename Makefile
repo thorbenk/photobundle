@@ -1,7 +1,6 @@
 grunt:
 	node_modules/grunt-cli/bin/grunt
 
-albums:
+thumbs:
 	PhotoFloat/scanner/main.py dist/albums dist/cache
-	./gen-albums.py
 
