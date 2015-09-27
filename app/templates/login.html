@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!-- kate: space-indents on; tab-width 2; replace-tabs on; indent-width 2; //-->
+<!-- See:
+CSS adapted from http://codepen.io/hassanyf/pen/xIitk
+//-->
+<html>
+<head>
+    <link href="/css/photobundle.min.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+input {
+  outline: none;
+}
+
+#wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+#box {
+  width: 50%;
+  margin: 0 auto;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 3px;
+}
+
+#top_header {
+  width: 100%;
+  margin: 0;
+  padding-top: 45px;
+}
+
+#top_header > h3 {
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-size: 300%;
+  color: #a7e0d3;
+  margin: 0;
+}
+
+#top_header > h5 {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 150%;
+  color: #a7e0d3;
+  line-height: 1.6;
+  margin: 0;
+  padding: 15px 0;
+  color: #555;
+}
+
+#inputs {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+input[type=text], input[type=password], input[type=submit] {
+  width: 100%;
+  background-color: #333333;
+  position: relative;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: -10px;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+input[type=text], input[type=password] {
+  font-family: 'Lato', sans-serif;
+  font-size:200%; 
+  border: thin solid #ccc;
+  border-radius: 5px;
+  color: #ffffff;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  border: thin solid #a7e0d3;
+  -webkit-transition: all .4s ease;
+  -moz-transition: all .4s ease;
+  -o-transition: all .4s ease;
+  transition: all .4s ease;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  border-left: thin solid #a7e0d3;
+}
+
+input[type=submit] {
+  color: #000000;
+  background-color: #a7e0d3;
+  border: 1px solid #a7e0d3;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  transition: all .3s ease;
+  margin-top: 0px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  font-weight: bold;
+}
+</style>
+
+<title>Login</title>
+</head>
+<body>
+<div id="wrapper">
+  <div id="box">
+  <div id="top_header">
+    <h3>Login</h3>
+    <h5>{{ config.I18N_LOGIN_FOR }}</h5>
+  </div>
+  <div id="inputs">
+    <form id="login" action="/login" method="POST" accept-charset='UTF-8' style="margin-left:6px;">
+        <input type='hidden' name='submitted' id='submitted' value='1'/>
+        <div class='container'>
+          <input type='text' name='username' id='username' value='' maxlength="50" size="30" placeholder="Username"/><br/>
+        </div>
+        <div class='container'>
+            <input type='password' name='password' id='password' maxlength="50" size="30" placeholder="Password" /><br/>
+        </div>
+        <div class='container'>
+            <input type='submit' name='Submit' value='Login' />
+        </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

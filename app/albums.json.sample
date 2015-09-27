@@ -1,0 +1,14 @@
+[
+    { 
+        "dirs":  ["2015-05-my-album"],
+        "out":   "2015-05-my-album.html",
+        "title": "My Album",
+        "auth": ["johndoe", "janedoe"]
+    },
+    { 
+        "dirs":  ["2015-09-photos", "2015-10-photos],
+        "out":   "photos-september-and-october.html",
+        "title": "Photos from September through October",
+        "auth": ["johndoe"]
+    }
+]

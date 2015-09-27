@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+
+ALBUM_PATH = "/path/to/photobundle/dist/albums"
+CACHE_PATH = "/path/to/photobundle/dist/cache"
+ALBUM_ACCEL = "/internal-albums"
+CACHE_ACCEL = "/internal-cache"
+
+I18N_PHOTOS_BY_HEADER = u"Photos by John Doe"
+I18N_LOGIN_FOR = u"Log in for the Photos of John Doe"
+I18N_BACK_TO_INDEX = u"back to the index"
+I18N_LIST_OF_ALBUMS = u"List of Albums"
+I18N_HELLO = u"Hello"
+I18N_LOGOUT = u"Logout"
+
+SECRET_KEY = "not so secret"
+DEBUG = True

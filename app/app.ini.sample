@@ -1,0 +1,12 @@
+[uwsgi]
+chdir = /path/to/photobundle
+virtualenv = /path/to/photobundle/.venv
+master = true
+uid = %n
+gid = %n
+chmod-socket = 660
+chown-socket = %n:nginx
+socket = 127.0.0.1:3031
+plugins = python27
+module = app:app 
+

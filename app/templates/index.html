@@ -1,0 +1,20 @@
+<!doctype html>
+<head>
+<title>{{ config.I18N_PHOTOS_BY_HEADER }}</title>
+<link href="/css/photobundle.min.css" rel="stylesheet" />
+</head>
+<body>
+<div align="right">
+{% if current_user.is_authenticated %}
+{{ config.I18N_HELLO }} {{ current_user.name }} | <a href="/logout">{{ config.I18N_LOGOUT }}</a>
+{% endif %}
+</div>
+<h1>{{ config.I18N_PHOTOS_BY_HEADER }}</h1>
+<h2>{{ config.I18N_LIST_OF_ALBUMS }}</h2>
+<ul>
+{% for album in albums %}
+<li><a href="a/{{ album.pagename }}">{{ album.title }}</a></li>
+{% endfor %}
+</ul>
+</body>
+</html>

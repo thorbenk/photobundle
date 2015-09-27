@@ -12,3 +12,5 @@ dist/cache/*
 *.kate-swp
 *.swp
 
+.venv
+

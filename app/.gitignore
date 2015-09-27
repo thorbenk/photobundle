@@ -1,0 +1,5 @@
+*.pyc
+app.cfg
+app.ini
+albums.json
+users.json
