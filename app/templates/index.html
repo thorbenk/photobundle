@@ -1,8 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
+<!-- kate: tab-indents off; tab-width 2; replace-tabs on; indent-width 2; //-->
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+    <meta charset="utf-8">
+    <title>{{ config.I18N_PHOTOS_BY_HEADER }}</title>
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0"> 
+    <link href="/css/photobundle.min.css" rel="stylesheet" />
+  </head>
+  <body>
 <head>
-<title>{{ config.I18N_PHOTOS_BY_HEADER }}</title>
-<link href="/css/photobundle.min.css" rel="stylesheet" />
-</head>
 <body>
 <div align="right">
 {% if current_user.is_authenticated %}

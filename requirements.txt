@@ -2,3 +2,4 @@ iptcinfo
 jinja2
 flask
 flask-login
+Pillow
