@@ -186,7 +186,7 @@ def index():
 def albums(path):
     if not hasPermissions(path):
         abort(403)
-    return accel_redirect(CACHE_ACCEL, CACHE_PATH, path)
+    return accel_redirect(ALBUM_ACCEL, ALBUM_PATH, path)
 
 @app.route("/cache/<path:path>")
 def cache(path):
