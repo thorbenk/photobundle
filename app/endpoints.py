@@ -135,7 +135,7 @@ def albumPage(path):
             albumPhotos.append((albumFileJson, albumPath, x))
             
     album_title = title
-    album_subtitle = "%d Fotos" % len(albumPhotos)
+    album_subtitle = "%d Photos" % len(albumPhotos)
     
     images = []
     

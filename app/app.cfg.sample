@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-ALBUM_PATH = "/path/to/photobundle/dist/albums"
-CACHE_PATH = "/path/to/photobundle/dist/cache"
+ALBUM_PATH = "PHOTOBUNDLE_PATH/dist/albums"
+CACHE_PATH = "PHOTOBUNDLE_PATH/dist/cache"
 ALBUM_ACCEL = "/internal-albums"
 CACHE_ACCEL = "/internal-cache"
 

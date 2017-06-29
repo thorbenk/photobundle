@@ -1,6 +1,6 @@
 [uwsgi]
-chdir = /path/to/photobundle
-virtualenv = /path/to/photobundle/.venv
+chdir = PHOTOBUNDLE_PATH
+virtualenv = PHOTOBUNDLE_PATH/.venv
 master = true
 uid = %n
 gid = %n

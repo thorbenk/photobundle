@@ -1,15 +1,20 @@
 # PhotoBundle
 
-**Note**: Very much a work in progress
-
 A simple folder-based photo viewer for the web,
 based on
 - [PhotoFloat](http://git.zx2c4.com/PhotoFloat/about/)
 - [PhotoSwipe](http://photoswipe.com/)
 
+![screenshot](https://raw.githubusercontent.com/thorbenk/photobundle/master/github/screenshot.png)
+
 ## Installation
 
+On Ubuntu 17.04, you'll need to install:
 ```bash
+sudo apt install npm grunt uwsgi uwsgi-plugin-python nginx
+```
+
+```bas
 git clone https://github.com/thorbenk/photobundle.git
 cd photobundle
 git submodule init
@@ -38,12 +43,26 @@ To configure the app, adapt the files
 - `app/users.json`
 - `app/albums.json`
 
-Then, configure nginx according to `app/nginx.sample`.
+Then, configure nginx according to `app/nginx.sample`.  
+Here is a simple development environment working on Ubuntu 17.04:
 
-Finally, run the app:
 ```bash
+cd photobandle
+source .venv/bin/activate
+
+sed -e "s|PHOTOBUNDLE_PATH|$PWD|g" app/nginx.sample > /tmp/nginx.conf && sudo cp /tmp/nginx.conf /etc/nginx/sites-available/localhost.photobundle
+sudo ln -s /etc/nginx/sites-available/localhost.photobundle /etc/nginx/sites-enabled
+sudo service nginx restart
+
+sed -e "s|PHOTOBUNDLE_PATH|$PWD|g" app/app.cfg.sample > app/app.cfg
+sed -e "s|PHOTOBUNDLE_PATH|$PWD|g" app/app.ini.sample > app/app.ini
+cp app/users.json.sample app/users.json
+vim app/albums.json # see below
+
 uwsgi app/app.ini
 ```
+
+Finally, go to http://localhost:8080
 
 ## Creating albums and thumbnails
 

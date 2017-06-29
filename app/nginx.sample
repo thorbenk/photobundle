@@ -1,17 +1,18 @@
 server {
+    listen 8080;
     location / {
         include uwsgi_params;
         uwsgi_pass 127.0.0.1:3031;
     }
     location /internal-cache/ {
         internal;
-        alias /path/to/photobundle/dist/cache/;
+        alias PHOTOBUNDLE_PATH/dist/cache/;
     }
     location /internal-albums/ {
         internal;
-        alias /path/to/photobundle/dist/albums/;
+        alias PHOTOBUNDLE_PATH/dist/albums/;
     }
-    location /img/ { alias /path/to/photobundle/dist/img/; }
-    location /js/  { alias /path/to/photobundle/dist/js/;  }
-    location /css/ { alias /path/to/photobundle/dist/css/; }
+    location /img/ { alias PHOTOBUNDLE_PATH/dist/img/; }
+    location /js/  { alias PHOTOBUNDLE_PATH/dist/js/;  }
+    location /css/ { alias PHOTOBUNDLE_PATH/dist/css/; }
 }
